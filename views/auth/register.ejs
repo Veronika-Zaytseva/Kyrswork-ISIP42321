@@ -1,0 +1,9 @@
+<%- include('../partials/head') %><%- include('../partials/header') %>
+<main class="container auth-page"><h1>Регистрация</h1>
+<form action="/auth/register" method="POST" class="form-card">
+<label>Имя</label><input type="text" name="name" required />
+<label>Email</label><input type="email" name="email" required />
+<label>Пароль</label><input type="password" name="password" required />
+<label>Подтверждение пароля</label><input type="password" name="confirmPassword" required />
+<button type="submit" class="btn">Зарегистрироваться</button>
+</form></main><%- include('../partials/footer') %>

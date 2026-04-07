@@ -1,0 +1,20 @@
+<%- include('../partials/head') %><%- include('../partials/header') %>
+<main class="container"><h1>Профиль пользователя</h1>
+<div class="profile-grid">
+<form action="/profile/update" method="POST" class="form-card">
+<h2>Личные данные</h2>
+<label>Имя</label><input type="text" name="name" value="<%= userProfile.name %>" required />
+<label>Email</label><input type="email" value="<%= userProfile.email %>" disabled />
+<label>Телефон</label><input type="text" name="phone" value="<%= userProfile.phone || '' %>" />
+<label>Город</label><input type="text" name="city" value="<%= userProfile.city || '' %>" />
+<label>Адрес</label><input type="text" name="address" value="<%= userProfile.address || '' %>" />
+<button type="submit" class="btn">Сохранить профиль</button>
+</form>
+<form action="/profile/change-password" method="POST" class="form-card">
+<h2>Смена пароля</h2>
+<label>Текущий пароль</label><input type="password" name="currentPassword" required />
+<label>Новый пароль</label><input type="password" name="newPassword" required />
+<label>Подтверждение нового пароля</label><input type="password" name="confirmPassword" required />
+<button type="submit" class="btn">Изменить пароль</button>
+</form>
+</div></main><%- include('../partials/footer') %>

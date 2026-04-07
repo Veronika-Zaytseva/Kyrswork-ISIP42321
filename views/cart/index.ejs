@@ -1,0 +1,19 @@
+<%- include('../partials/head') %><%- include('../partials/header') %>
+<main class="container"><h1>Корзина</h1>
+<% if (!items.length) { %><p>Ваша корзина пуста.</p><% } else { %>
+<div class="cart-list">
+<% items.forEach(item => { %>
+<div class="cart-item">
+<img src="<%= item.image_url || '/uploads/no-image.png' %>" alt="<%= item.name %>" />
+<div class="cart-item-info">
+<h3><%= item.name %></h3><p>Размер: <%= item.size %></p><p>Цена: <%= Number(item.price).toFixed(2) %> ₽</p>
+<form action="/cart/<%= item.id %>/update" method="POST" class="inline-form"><input type="number" name="quantity" min="0" value="<%= item.quantity %>" /><button type="submit" class="btn btn-outline">Обновить</button></form>
+<form action="/cart/<%= item.id %>/delete" method="POST" class="inline-form"><button type="submit" class="btn btn-danger">Удалить</button></form>
+</div></div><% }) %>
+</div>
+<div class="checkout-card"><h2>Итого: <%= total %> ₽</h2>
+<form action="/orders/create" method="POST" class="form-card">
+<label>Адрес доставки</label><input type="text" name="deliveryAddress" required />
+<label>Комментарий к заказу</label><textarea name="comment" rows="4"></textarea>
+<button type="submit" class="btn">Оформить заказ</button>
+</form></div><% } %></main><%- include('../partials/footer') %>

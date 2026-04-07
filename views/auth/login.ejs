@@ -1,0 +1,8 @@
+<%- include('../partials/head') %><%- include('../partials/header') %>
+<main class="container auth-page"><h1>Вход</h1>
+<form action="/auth/login" method="POST" class="form-card">
+<label>Email</label><input type="email" name="email" required />
+<label>Пароль</label><input type="password" name="password" required />
+<button type="submit" class="btn">Войти</button>
+<p><a href="/auth/forgot-password">Забыли пароль?</a></p>
+</form></main><%- include('../partials/footer') %>

@@ -1,0 +1,10 @@
+const express = require('express');
+const { body } = require('express-validator');
+const orderController = require('../controllers/order.controller');
+const validate = require('../middlewares/validation.middleware');
+const { isAuthenticated } = require('../middlewares/auth.middleware');
+const asyncHandler = require('../utils/asyncHandler');
+const router = express.Router();
+router.get('/', isAuthenticated, asyncHandler(orderController.getUserOrders));
+router.post('/create', isAuthenticated, [body('deliveryAddress').trim().isLength({ min:5, max:255 }).withMessage('Введите корректный адрес доставки.')], validate, asyncHandler(orderController.createOrder));
+module.exports = router;

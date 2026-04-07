@@ -1,0 +1,19 @@
+<header class="site-header">
+  <div class="container header-row">
+    <a href="/" class="logo">Clothing Store</a>
+    <nav class="nav">
+      <a href="/catalog">Каталог</a>
+      <% if (currentUser) { %>
+        <a href="/cart">Корзина</a>
+        <a href="/orders">Мои заказы</a>
+        <a href="/profile">Профиль</a>
+        <% if (currentUser.role === 'admin') { %><a href="/admin">Админка</a><% } %>
+        <span class="user-badge"><%= currentUser.name %></span>
+        <form action="/auth/logout" method="POST" class="inline-form"><button type="submit" class="btn btn-outline">Выйти</button></form>
+      <% } else { %>
+        <a href="/auth/login">Вход</a>
+        <a href="/auth/register">Регистрация</a>
+      <% } %>
+    </nav>
+  </div>
+</header>

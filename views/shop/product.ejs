@@ -1,0 +1,17 @@
+<%- include('../partials/head') %><%- include('../partials/header') %>
+<main class="container product-page"><div class="product-detail">
+<div class="product-image"><img src="<%= product.image_url || '/uploads/no-image.png' %>" alt="<%= product.name %>" /></div>
+<div class="product-info">
+<h1><%= product.name %></h1><p class="muted">Категория: <%= product.category %></p><p><%= product.description %></p><h2><%= Number(product.price).toFixed(2) %> ₽</h2>
+<% if (currentUser) { %>
+<form action="/cart/add" method="POST" class="form-card">
+<input type="hidden" name="productId" value="<%= product.id %>" />
+<label>Размер</label>
+<select name="productSizeId" required>
+<% sizes.forEach(size => { %><option value="<%= size.id %>" <%= size.stock <= 0 ? 'disabled' : '' %>><%= size.size %> (<%= size.stock > 0 ? 'в наличии: ' + size.stock : 'нет в наличии' %>)</option><% }) %>
+</select>
+<label>Количество</label><input type="number" name="quantity" min="1" value="1" required />
+<button type="submit" class="btn">Добавить в корзину</button>
+</form>
+<% } else { %><p>Чтобы добавить товар в корзину, <a href="/auth/login">войдите</a>.</p><% } %>
+</div></div></main><%- include('../partials/footer') %>

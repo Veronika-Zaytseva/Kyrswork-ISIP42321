@@ -1,0 +1,4 @@
+<%- include('../partials/head') %><%- include('../partials/header') %>
+<main class="container"><h1>Все заказы</h1>
+<% orders.forEach(order => { %><div class="order-card"><h3>Заказ №<%= order.id %></h3><p>Пользователь: <strong><%= order.user_name %></strong> (<%= order.user_email %>)</p><p>Статус: <strong><%= order.status %></strong></p><p>Сумма: <strong><%= Number(order.total_amount).toFixed(2) %> ₽</strong></p><div class="order-items"><% order.items.forEach(item => { %><div class="order-item-row"><span><%= item.product_name %> / <%= item.size_name %></span><span><%= item.quantity %> × <%= Number(item.price).toFixed(2) %> ₽</span></div><% }) %></div></div><% }) %>
+</main><%- include('../partials/footer') %>

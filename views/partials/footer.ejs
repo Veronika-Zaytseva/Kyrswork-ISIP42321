@@ -1,0 +1,145 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <h3>Clothing Store</h3>
+      <p>
+        Современный интернет-магазин одежды с удобным каталогом,
+        корзиной, личным кабинетом и административной панелью.
+      </p>
+    </div>
+
+    <div class="footer-column">
+      <h4>Навигация</h4>
+      <ul>
+        <li><a href="/catalog">Каталог</a></li>
+        <li><a href="/cart">Корзина</a></li>
+        <li><a href="/orders">Мои заказы</a></li>
+        <li><a href="/profile">Профиль</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Покупателям</h4>
+      <ul>
+        <li>
+          <button
+            type="button"
+            class="footer-modal-btn"
+            data-modal-title="Доставка и оплата"
+            data-modal-content="
+              <p><strong>Доставка:</strong> доставка осуществляется курьером по городу и транспортными службами по регионам.</p>
+              <p><strong>Сроки доставки:</strong> от 1 до 7 рабочих дней в зависимости от региона.</p>
+              <p><strong>Оплата:</strong> доступна оплата банковской картой при оформлении заказа.</p>
+              <p><strong>Самовывоз:</strong> в учебной версии проекта можно указать самовывоз как дополнительный способ получения заказа.</p>
+            "
+          >
+            Доставка и оплата
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="footer-modal-btn"
+            data-modal-title="Возврат товара"
+            data-modal-content="
+              <p>Покупатель может оформить возврат товара в течение 14 дней с момента получения заказа.</p>
+              <p>Возврат возможен при сохранении товарного вида, бирок и упаковки.</p>
+              <p>Для оформления возврата необходимо связаться с магазином и указать номер заказа.</p>
+              <p>Денежные средства возвращаются тем же способом, которым была произведена оплата.</p>
+            "
+          >
+            Возврат товара
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="footer-modal-btn"
+            data-modal-title="Таблица размеров"
+            data-modal-content="
+              <table class='modal-size-table'>
+                <thead>
+                  <tr>
+                    <th>Размер</th>
+                    <th>Обхват груди</th>
+                    <th>Обхват талии</th>
+                    <th>Обхват бёдер</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>XS</td><td>80-84 см</td><td>60-64 см</td><td>86-90 см</td></tr>
+                  <tr><td>S</td><td>84-88 см</td><td>64-68 см</td><td>90-94 см</td></tr>
+                  <tr><td>M</td><td>88-96 см</td><td>68-76 см</td><td>94-102 см</td></tr>
+                  <tr><td>L</td><td>96-104 см</td><td>76-84 см</td><td>102-110 см</td></tr>
+                  <tr><td>XL</td><td>104-112 см</td><td>84-92 см</td><td>110-118 см</td></tr>
+                </tbody>
+              </table>
+              <p>Размерная сетка является ориентировочной и может незначительно отличаться в зависимости от модели.</p>
+            "
+          >
+            Таблица размеров
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="footer-modal-btn"
+            data-modal-title="Частые вопросы"
+            data-modal-content="
+              <p><strong>Как оформить заказ?</strong><br>Добавьте товар в корзину, перейдите в корзину и подтвердите оформление заказа.</p>
+              <p><strong>Можно ли изменить заказ?</strong><br>Да, до момента отправки заказа можно связаться с магазином для уточнений.</p>
+              <p><strong>Как узнать статус заказа?</strong><br>Статус отображается в разделе «Мои заказы».</p>
+              <p><strong>Можно ли отменить заказ?</strong><br>Да, если заказ ещё не передан в доставку.</p>
+            "
+          >
+            Частые вопросы
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="footer-column">
+      <h4>Контакты</h4>
+      <ul>
+        <li>Email: info@clothingstore.ru</li>
+        <li>Телефон: +7 (900) 123-45-67</li>
+        <li>Город: Москва</li>
+        <li>Время работы: 10:00–22:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-row">
+      <span>© 2026 Clothing Store. Все права защищены.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Модальное окно -->
+<div class="custom-modal" id="footerInfoModal">
+  <div class="custom-modal__overlay" id="footerModalOverlay"></div>
+
+  <div
+    class="custom-modal__dialog"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="footerModalTitle"
+  >
+    <button
+      type="button"
+      class="custom-modal__close"
+      id="footerModalClose"
+      aria-label="Закрыть"
+    >
+      ×
+    </button>
+
+    <h3 class="custom-modal__title" id="footerModalTitle"></h3>
+    <div class="custom-modal__body" id="footerModalBody"></div>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
