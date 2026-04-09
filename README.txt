@@ -1,8 +1,8 @@
 Как запустить:
 1) Создайте БД:
-   mysql -u root -p < database.sql
+Используйте database.sql
 
-2) Создайте .env на основе .env.example
+2) Создайте .env 
 
 3) Установите зависимости:
    npm install
