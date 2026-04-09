@@ -98,23 +98,13 @@ CREATE TABLE IF NOT EXISTS order_items (
         ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS password_reset_tokens (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    token_hash VARCHAR(255) NOT NULL,
-    expires_at DATETIME NOT NULL,
-    used_at DATETIME DEFAULT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT fk_password_reset_user
-        FOREIGN KEY (user_id) REFERENCES users(id)
-        ON DELETE CASCADE
-);
+
 
 CREATE INDEX idx_products_category ON products(category);
 CREATE INDEX idx_products_gender ON products(gender);
 CREATE INDEX idx_cart_user ON cart_items(user_id);
 CREATE INDEX idx_orders_user ON orders(user_id);
-CREATE INDEX idx_password_reset_user ON password_reset_tokens(user_id);
+
 
 -- Администратор
 -- Пароль: 123123
