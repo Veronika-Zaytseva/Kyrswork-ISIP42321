@@ -1,38 +1,131 @@
-<%- include('../partials/head') %><%- include('../partials/header') %>
-<main class="container">
-<h1>Каталог товаров</h1>
-<form method="GET" action="/catalog" class="filter-form">
-<input type="text" name="search" placeholder="Поиск..." value="<%= filters.search %>" />
-<select name="category"><option value="">Все категории</option><% categories.forEach(item => { %><option value="<%= item.category %>" <%= filters.category === item.category ? 'selected' : '' %>><%= item.category %></option><% }) %></select>
-<select name="gender">
-<option value="">Для всех</option>
-<option value="male" <%= filters.gender === 'male' ? 'selected' : '' %>>Мужское</option>
-<option value="female" <%= filters.gender === 'female' ? 'selected' : '' %>>Женское</option>
-<option value="unisex" <%= filters.gender === 'unisex' ? 'selected' : '' %>>Unisex</option>
-</select>
-<input type="number" step="0.01" name="minPrice" placeholder="Цена от" value="<%= filters.minPrice %>" />
-<input type="number" step="0.01" name="maxPrice" placeholder="Цена до" value="<%= filters.maxPrice %>" />
-<select name="sort">
-<option value="newest" <%= filters.sort === 'newest' ? 'selected' : '' %>>Сначала новые</option>
-<option value="price_asc" <%= filters.sort === 'price_asc' ? 'selected' : '' %>>Цена ↑</option>
-<option value="price_desc" <%= filters.sort === 'price_desc' ? 'selected' : '' %>>Цена ↓</option>
-<option value="name_asc" <%= filters.sort === 'name_asc' ? 'selected' : '' %>>По названию</option>
-</select>
-<button type="submit" class="btn">Применить</button>
-</form>
-<div class="product-grid">
-<% if (!products.length) { %><p>Товары не найдены.</p><% } %>
-<% products.forEach(product => { %>
-<div class="product-card">
-<img src="<%= product.image_url || '/uploads/no-image.png' %>" alt="<%= product.name %>" />
-<h3><%= product.name %></h3><p><%= product.category %></p><strong><%= Number(product.price).toFixed(2) %> ₽</strong>
-<a href="/products/<%= product.id %>" class="btn">Подробнее</a>
-</div>
-<% }) %>
-</div>
-<div class="pagination">
-<% for (let p = 1; p <= pagination.totalPages; p++) { %>
-<a class="page-link <%= p === pagination.currentPage ? 'active' : '' %>" href="/catalog?search=<%= encodeURIComponent(filters.search || '') %>&category=<%= encodeURIComponent(filters.category || '') %>&gender=<%= encodeURIComponent(filters.gender || '') %>&minPrice=<%= filters.minPrice || '' %>&maxPrice=<%= filters.maxPrice || '' %>&sort=<%= encodeURIComponent(filters.sort || 'newest') %>&page=<%= p %>"><%= p %></a>
-<% } %>
-</div>
-</main><%- include('../partials/footer') %>
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<section class="catalog-page">
+  <div class="container">
+    <div class="catalog-top">
+      <div>
+        <p class="catalog-subtitle">Каталог магазина</p>
+        <h1 class="catalog-title">Каталог товаров</h1>
+      </div>
+    </div>
+
+    <form class="filter-form" method="GET" action="/catalog">
+      <div>
+        <label for="category">Категория</label>
+        <select id="category" name="category">
+          <option value="">Все категории</option>
+          <% categories.forEach(item => { %>
+            <option value="<%= item.category %>" <%= filters.category === item.category ? 'selected' : '' %>>
+              <%= item.category %>
+            </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div>
+        <label for="gender">Пол</label>
+        <select id="gender" name="gender">
+          <option value="">Для всех</option>
+          <option value="male" <%= filters.gender === 'male' ? 'selected' : '' %>>Мужское</option>
+          <option value="female" <%= filters.gender === 'female' ? 'selected' : '' %>>Женское</option>
+          <option value="unisex" <%= filters.gender === 'unisex' ? 'selected' : '' %>>Unisex</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="search">Поиск</label>
+        <input
+          id="search"
+          type="text"
+          name="search"
+          value="<%= filters.search %>"
+          placeholder="Название товара"
+        >
+      </div>
+
+      <div>
+        <label for="minPrice">Цена от</label>
+        <input
+          id="minPrice"
+          type="number"
+          name="minPrice"
+          value="<%= filters.minPrice %>"
+          placeholder="0"
+        >
+      </div>
+
+      <div>
+        <label for="maxPrice">Цена до</label>
+        <input
+          id="maxPrice"
+          type="number"
+          name="maxPrice"
+          value="<%= filters.maxPrice %>"
+          placeholder="10000"
+        >
+      </div>
+
+      <div>
+        <label for="sort">Сортировка</label>
+        <select id="sort" name="sort">
+          <option value="newest" <%= filters.sort === 'newest' ? 'selected' : '' %>>Сначала новые</option>
+          <option value="price_asc" <%= filters.sort === 'price_asc' ? 'selected' : '' %>>Цена ↑</option>
+          <option value="price_desc" <%= filters.sort === 'price_desc' ? 'selected' : '' %>>Цена ↓</option>
+          <option value="name_asc" <%= filters.sort === 'name_asc' ? 'selected' : '' %>>По названию</option>
+        </select>
+      </div>
+
+      <div class="filter-actions">
+        <button type="submit" class="btn">Применить</button>
+      </div>
+    </form>
+
+    <% if (!products.length) { %>
+      <div class="empty-state">
+        <h3>Товары не найдены</h3>
+        <p>Попробуй изменить фильтры или поиск.</p>
+      </div>
+    <% } %>
+
+    <% if (products.length) { %>
+      <div class="product-grid">
+        <% products.forEach(product => { %>
+          <article class="product-card">
+            <a href="/products/<%= product.id %>" class="product-image-link">
+              <img
+                src="<%= product.image_url ? product.image_url : 'https://placehold.co/600x800?text=No+Image' %>"
+                alt="<%= product.name %>"
+              >
+            </a>
+
+            <div class="product-card-body">
+              <p class="product-category"><%= product.category %></p>
+
+              <h3 class="product-title">
+                <a href="/products/<%= product.id %>"><%= product.name %></a>
+              </h3>
+
+              <p class="product-price"><%= Number(product.price).toFixed(2) %> ₽</p>
+
+              <a href="/products/<%= product.id %>" class="btn product-btn">Подробнее</a>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+
+      <div class="pagination">
+        <% for (let p = 1; p <= pagination.totalPages; p++) { %>
+          <a
+            class="page-link <%= p === pagination.currentPage ? 'active' : '' %>"
+            href="/catalog?page=<%= p %>&category=<%= filters.category %>&gender=<%= filters.gender %>&sort=<%= filters.sort %>&minPrice=<%= filters.minPrice %>&maxPrice=<%= filters.maxPrice %>&search=<%= filters.search %>"
+          >
+            <%= p %>
+          </a>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>
