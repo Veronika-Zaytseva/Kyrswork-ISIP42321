@@ -1,6 +1,7 @@
 Как запустить:
 1) Создайте БД:
 Используйте database.sql
+mysql -u root -p < database.sql
 
 2) Создайте .env 
 
